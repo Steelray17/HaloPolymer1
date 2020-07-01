@@ -8,6 +8,7 @@ namespace HaloPolymer
 {
     static class Program
     {
+        public static HaloPolymerEntities HaloPolymer = new HaloPolymerEntities();
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
@@ -16,7 +17,8 @@ namespace HaloPolymer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new FormAuthorization());
+            //Application.Run(new Menu());
         }
     }
 }

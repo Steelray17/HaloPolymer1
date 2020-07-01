@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище HaloPolymerModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ASYTP">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_ASYTP" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Ceh">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number_ceha" Type="int" />
+          <Property Name="Name_ceha" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DataBase">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCeh" Type="int" />
+          <Property Name="idASYTP" Type="int" />
+          <Property Name="idEquipmentType" Type="int" />
+          <Property Name="Name_Equipment" Type="nvarchar(max)" />
+          <Property Name="Name_Network" Type="nvarchar(max)" />
+          <Property Name="Number_Serial" Type="nvarchar(max)" />
+          <Property Name="Number_Inventory" Type="nvarchar(max)" />
+          <Property Name="IP_address" Type="nvarchar(max)" />
+          <Property Name="Time_Synchron" Type="nvarchar(max)" />
+          <Property Name="Mac_address" Type="nvarchar(max)" />
+          <Property Name="VLAN" Type="nvarchar(max)" />
+          <Property Name="Manufacturer" Type="nvarchar(max)" />
+          <Property Name="Network_card" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="EquipmentType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DataBase_ASYTP">
+          <End Role="ASYTP" Type="Self.ASYTP" Multiplicity="0..1" />
+          <End Role="DataBase" Type="Self.DataBase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASYTP">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DataBase">
+              <PropertyRef Name="idASYTP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DataBase_Ceh">
+          <End Role="Ceh" Type="Self.Ceh" Multiplicity="0..1" />
+          <End Role="DataBase" Type="Self.DataBase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ceh">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DataBase">
+              <PropertyRef Name="idCeh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DataBase_EquipmentType">
+          <End Role="EquipmentType" Type="Self.EquipmentType" Multiplicity="0..1" />
+          <End Role="DataBase" Type="Self.DataBase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EquipmentType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DataBase">
+              <PropertyRef Name="idEquipmentType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище HaloPolymerModelContainer">
+          <EntitySet Name="ASYTP" EntityType="Self.ASYTP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ceh" EntityType="Self.Ceh" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DataBase" EntityType="Self.DataBase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EquipmentType" EntityType="Self.EquipmentType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DataBase_ASYTP" Association="Self.FK_DataBase_ASYTP">
+            <End Role="ASYTP" EntitySet="ASYTP" />
+            <End Role="DataBase" EntitySet="DataBase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DataBase_Ceh" Association="Self.FK_DataBase_Ceh">
+            <End Role="Ceh" EntitySet="Ceh" />
+            <End Role="DataBase" EntitySet="DataBase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DataBase_EquipmentType" Association="Self.FK_DataBase_EquipmentType">
+            <End Role="EquipmentType" EntitySet="EquipmentType" />
+            <End Role="DataBase" EntitySet="DataBase" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HaloPolymerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ASYTP">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_ASYTP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DataBase" Relationship="Self.FK_DataBase_ASYTP" FromRole="ASYTP" ToRole="DataBase" />
+        </EntityType>
+        <EntityType Name="Ceh">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number_ceha" Type="Int32" />
+          <Property Name="Name_ceha" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DataBase" Relationship="Self.FK_DataBase_Ceh" FromRole="Ceh" ToRole="DataBase" />
+        </EntityType>
+        <EntityType Name="DataBase">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCeh" Type="Int32" />
+          <Property Name="idASYTP" Type="Int32" />
+          <Property Name="idEquipmentType" Type="Int32" />
+          <Property Name="Name_Equipment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name_Network" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Number_Serial" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Number_Inventory" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IP_address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Time_Synchron" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Mac_address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VLAN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Manufacturer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Network_card" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ASYTP" Relationship="Self.FK_DataBase_ASYTP" FromRole="DataBase" ToRole="ASYTP" />
+          <NavigationProperty Name="Ceh" Relationship="Self.FK_DataBase_Ceh" FromRole="DataBase" ToRole="Ceh" />
+          <NavigationProperty Name="EquipmentType" Relationship="Self.FK_DataBase_EquipmentType" FromRole="DataBase" ToRole="EquipmentType" />
+        </EntityType>
+        <EntityType Name="EquipmentType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DataBase" Relationship="Self.FK_DataBase_EquipmentType" FromRole="EquipmentType" ToRole="DataBase" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DataBase_ASYTP">
+          <End Role="ASYTP" Type="Self.ASYTP" Multiplicity="0..1" />
+          <End Role="DataBase" Type="Self.DataBase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASYTP">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DataBase">
+              <PropertyRef Name="idASYTP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DataBase_Ceh">
+          <End Role="Ceh" Type="Self.Ceh" Multiplicity="0..1" />
+          <End Role="DataBase" Type="Self.DataBase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ceh">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DataBase">
+              <PropertyRef Name="idCeh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DataBase_EquipmentType">
+          <End Role="EquipmentType" Type="Self.EquipmentType" Multiplicity="0..1" />
+          <End Role="DataBase" Type="Self.DataBase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EquipmentType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DataBase">
+              <PropertyRef Name="idEquipmentType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HaloPolymerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ASYTP" EntityType="Self.ASYTP" />
+          <EntitySet Name="Ceh" EntityType="Self.Ceh" />
+          <EntitySet Name="DataBase" EntityType="Self.DataBase" />
+          <EntitySet Name="EquipmentType" EntityType="Self.EquipmentType" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_DataBase_ASYTP" Association="Self.FK_DataBase_ASYTP">
+            <End Role="ASYTP" EntitySet="ASYTP" />
+            <End Role="DataBase" EntitySet="DataBase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DataBase_Ceh" Association="Self.FK_DataBase_Ceh">
+            <End Role="Ceh" EntitySet="Ceh" />
+            <End Role="DataBase" EntitySet="DataBase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DataBase_EquipmentType" Association="Self.FK_DataBase_EquipmentType">
+            <End Role="EquipmentType" EntitySet="EquipmentType" />
+            <End Role="DataBase" EntitySet="DataBase" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище HaloPolymerModelContainer" CdmEntityContainer="HaloPolymerEntities">
+          <EntitySetMapping Name="ASYTP">
+            <EntityTypeMapping TypeName="HaloPolymerModel.ASYTP">
+              <MappingFragment StoreEntitySet="ASYTP">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name_ASYTP" ColumnName="Name_ASYTP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ceh">
+            <EntityTypeMapping TypeName="HaloPolymerModel.Ceh">
+              <MappingFragment StoreEntitySet="Ceh">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Number_ceha" ColumnName="Number_ceha" />
+                <ScalarProperty Name="Name_ceha" ColumnName="Name_ceha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DataBase">
+            <EntityTypeMapping TypeName="HaloPolymerModel.DataBase">
+              <MappingFragment StoreEntitySet="DataBase">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idCeh" ColumnName="idCeh" />
+                <ScalarProperty Name="idASYTP" ColumnName="idASYTP" />
+                <ScalarProperty Name="idEquipmentType" ColumnName="idEquipmentType" />
+                <ScalarProperty Name="Name_Equipment" ColumnName="Name_Equipment" />
+                <ScalarProperty Name="Name_Network" ColumnName="Name_Network" />
+                <ScalarProperty Name="Number_Serial" ColumnName="Number_Serial" />
+                <ScalarProperty Name="Number_Inventory" ColumnName="Number_Inventory" />
+                <ScalarProperty Name="IP_address" ColumnName="IP_address" />
+                <ScalarProperty Name="Time_Synchron" ColumnName="Time_Synchron" />
+                <ScalarProperty Name="Mac_address" ColumnName="Mac_address" />
+                <ScalarProperty Name="VLAN" ColumnName="VLAN" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="Network_card" ColumnName="Network_card" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EquipmentType">
+            <EntityTypeMapping TypeName="HaloPolymerModel.EquipmentType">
+              <MappingFragment StoreEntitySet="EquipmentType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="HaloPolymerModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
