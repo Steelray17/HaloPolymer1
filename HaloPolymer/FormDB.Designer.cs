@@ -466,7 +466,9 @@
             this.Controls.Add(this.comboBoxASYTP);
             this.Controls.Add(this.comboBoxCeh);
             this.Controls.Add(this.listViewDB);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormDB";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "База данных IP адресов АСУТП";
             this.Load += new System.EventHandler(this.FormDB_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
